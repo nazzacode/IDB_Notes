@@ -6,8 +6,10 @@ Notes from Introduction to Databases 2020. University of Edinburgh 3rd year.
 2. Worship the holy gods of Pandoc.
 
 ## Contributing
-Note: If you don't have the requirements but want to contribute, you can just do the first step and contact me
-0. Requirements: markdown editor, bash, pandoc, latex engine 
+Note: If you don't have the requirements but want to contribute, you can just do the first step (1) and contact me. 
+
+Requirements: markdown editor, bash, pandoc, latex engine 
+
 1. Update the individial lecture markdown files
 2. Run the following from the project root in order
 
