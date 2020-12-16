@@ -6,8 +6,11 @@ Notes from Introduction to Databases 2020. University of Edinburgh 3rd year.
 2. Worship the holy gods of Pandoc.
 
 ## Contributing
-update the individial lecture markdown files
+1. update the individial lecture markdown files
+```bash 
+cat L*.md > IDB_All_Lecture_Notes.md
+```
 
 ## Todo's
 - [ ] make a list of todo's
-- [ ] write a bash script to automate `cat`-ing all the lecture files and adding a toc with pandoc
+- [ ] write a bash script to automate contributing intructions
