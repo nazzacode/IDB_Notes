@@ -21,7 +21,7 @@ $$
 ## Relational Algebra (RA) $\equiv$ Safe Relational Calculus (RC)
 RA and RC are syntactically different but semantically _equally expressive_.
 
-  - important as your database engine needs to be able translate your what to a how.
+  - important as your database engine needs to be able translate your what (RC) to a how (RA).
 
 ## Relational Algebra to Relational Calculus
 Translate each RA expression $E$ into a FOL formula $\varphi$.
@@ -30,37 +30,35 @@ Environment ($\eta$)
   : _Injective Map_ from attributes to values.
 
   - map convention to be used in class $\eta (A) = x_A$ 
+  - could choose any, e.g $\eta (A) = a$, $\eta (A) = y_{potato}$
 
 ### Base Relation
   
 
 $R$ over $A_1,...,A_n$ is translated to $R(\eta(A_1),...,\eta(A_n))$
 
-_Example:_ If $R$ is a base relation over $A,B$
-$$\eta = \{ A \mapsto x_A, B \mapsto x_B \}$$
+_Example:_ If $R$ is a base relation over $A,B$ then we could create the following map of the environment: $\eta = \{ A \mapsto x_A, B \mapsto x_B \}$
 
-### Renaming
+### Renaming ($\eta$)
 
-$$\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$$
-
-__Process__ _Rename($\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$) $\rightarrow$ RC:_
+__Algorithm__ _Rename($\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$) $\rightarrow$ RC:_
 
   1. Translate $E$ to $\varphi$.
   2. If there is no mapping for NEW in $\eta$ add $\{ \text{NEW} \mapsto x_{\text{new}} \}$.
-  3. Replace every occurrence of $eta(\text{NEW})$ in $\varphi$ with a _fresh_ variable.
+  3. Replace every occurrence of $\eta(\text{NEW})$ in $\varphi$ with a _fresh_ variable.
   4. Replace every (free) occurrence of $\eta(\text{OLD})$ in $\varphi$ by $\eta(\text{NEW})$.
 
 _Example:_ If $R$ is a base relation over $A,B$ then translate the following (RA) to relational calculus, $\rho_{A \rightarrow B}(\rho_{B \rightarrow C}(R))$.
 
-  1. Translate inner bracket $\rho_{B \rightarrow C}(R))$\
-      1. Translate inner bracket $R$ over $A,B$ gives 
+  1. Translate inner bracket $\rho_{B \rightarrow C}(R)$\
+      1. Translate the inner (inner) bracket, $(R)$, over $A,B$ gives 
 $$R(x_A,x_B)$$
       2. No mapping for $C$ (NEW) so adding $C$ to map,
 $$M = \{ A \mapsto x_A, B \mapsto x_B,  C \mapsto x_C \}$$
       3. no occurrence of $x_C$ ($\eta$(NEW)) in $R(x_A,x_B)$ so this step does nothing.
       4. Replacing $x_B$ with $x_C$ gives
 $$R(x_A,x_C)$$
-  2. Mapping for $B$ so does nothing.
+  2. Existing mapping for $B$ so do not need to add to map.
   3. No instance of $x_B$ so this step does nothing.
   4. Replacing $x_A$ with $x_B$
 $$R(x_B,x_C)$$
@@ -70,12 +68,12 @@ $$\rho_{A \rightarrow B}(\rho_{B \rightarrow C}(R)) \iff R(x_B,x_C)$$
 
 
 ### Projection
-$$\pi(E) \text{ is translated to } \exists X \varphi$$
-where
+$\pi(E) \text{ is translated to } \exists X \varphi$\
+where,
 
   - $\varphi$ is the translation of $E$
   - $X = \textbf{ free}(\varphi) - \eta(\alpha)$
-    - attributes that are _not_ projected become quantified
+    - _Intuition:_ attributes that are _not_ projected become quantified
 
 _Example:_ For a base relation $R$ over $A,B$, translate $\pi_A(R)$.
 
@@ -83,8 +81,8 @@ $$\exists x_B R(a_A,x_B)$$
 
 
 ### Selection
-$$\sigma_{\theta}(E) \text{ is translated to } \varphi \land \eta(\theta)$$
-where
+$\sigma_{\theta}(E) \text{ is translated to } \varphi \land \eta(\theta)$\
+where,
 
   - $\varphi$ is the translation of $E$
   - $\eta(\theta)$ is obtained from $\theta$ by replacing each attribute $A$ by $\eta(A)$

@@ -2,7 +2,7 @@
 # IDB Lecture 6: Predicate Logic
 
 Free variables
-  : variables that are not in the scope of any quantifier. A variable that is not free is bound.
+  : variables that are not in the scope of any _quantifier_. A variable that is not free is _bound_.
 
 ## Interpretations
 A formula may be true or false w.r.t a given _interpretation_.
@@ -25,6 +25,7 @@ Variable Assignment ($v$)
     - _Notation:_ $v[x/d]$ is $v$ with x $\rightarrow$ d
 
 ## Semantics of FOL: Terms
+
 Interpreatation of terms under $(\mathcal{I},v)$
   : 
   $$x^{\mathcal{I},v} = v(x)$$

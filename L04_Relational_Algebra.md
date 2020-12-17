@@ -24,7 +24,7 @@ Product ($\times$)
   
   - relations mut have a disjoint set of atributes
   - $cardinality(R \times S) = cardinality(R) \times cardinality(S)$
-    - where __Cardinality__ is the number of attribues.
+    - where __Cardinality__ is the number of _rows_.
   - $arity(R \times S) = arity(R) + arity(S)$
     - where __Arity__ is the number of _attributes_.\
 
@@ -33,7 +33,7 @@ Renaming ($\rho$)
   $$\rho_{replacements}(R)$$ 
   where a replacement has the form $A \rightarrow B$.
 
-### Union Intersection & Difference
+### Union, Intersection & Difference
 _Note:_ Relations must have the same attributes.
 
 Union ($\cup$)

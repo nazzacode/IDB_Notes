@@ -138,7 +138,7 @@ Product ($\times$)
   
   - relations mut have a disjoint set of atributes
   - $cardinality(R \times S) = cardinality(R) \times cardinality(S)$
-    - where __Cardinality__ is the number of attribues.
+    - where __Cardinality__ is the number of _rows_.
   - $arity(R \times S) = arity(R) + arity(S)$
     - where __Arity__ is the number of _attributes_.\
 
@@ -147,7 +147,7 @@ Renaming ($\rho$)
   $$\rho_{replacements}(R)$$ 
   where a replacement has the form $A \rightarrow B$.
 
-### Union Intersection & Difference
+### Union, Intersection & Difference
 _Note:_ Relations must have the same attributes.
 
 Union ($\cup$)
@@ -193,21 +193,22 @@ where common attributes in $T_1,...,T_m$ must be renamed.
 # IDB Lecture 5: Relational Algebra on Sets 
 
 ## Division
-Divison
-  : $R$ over a set of attributes $X$\
-  $S$ over a set of attributes $Y \subset X$\
-  Let $Z =  X - Y$\
-  $R \div S = \{ r \in \pi_Z(R) \,|\, \forall s \in S, rs \in R \}$\
-  $\quad = \{ r \in \pi_Z(R) \,|\, \{r\} \times S \subseteq R \}$\
-  $\quad = \pi_Z (R) - \pi_Z (\pi_Z (R) \times S - R)$
-
-Note: I don't really understand
+For, $R$ over a set of attributes $X$\, $S$ over a set of attributes $Y \subset X$. Let $Z =  X - Y$
+$$
+\begin{aligned}
+  R \div S &= \{ r \in \pi_Z(R) \,|\, \forall s \in S, rs \in R \}\\
+  &= \{ r \in \pi_Z(R) \,|\, \{r\} \times S \subseteq R \}\\
+  &= \pi_Z (R) - \pi_Z (\pi_Z (R) \times S - R)
+\end{aligned}
+$$
+Note: I don't really understand\
+Intuition: remove all data from X relating to Y?
 
 
 # IDB Lecture 6: Predicate Logic
 
 Free variables
-  : variables that are not in the scope of any quantifier. A variable that is not free is bound.
+  : variables that are not in the scope of any _quantifier_. A variable that is not free is _bound_.
 
 ## Interpretations
 A formula may be true or false w.r.t a given _interpretation_.
@@ -230,6 +231,7 @@ Variable Assignment ($v$)
     - _Notation:_ $v[x/d]$ is $v$ with x $\rightarrow$ d
 
 ## Semantics of FOL: Terms
+
 Interpreatation of terms under $(\mathcal{I},v)$
   : 
   $$x^{\mathcal{I},v} = v(x)$$
@@ -352,7 +354,7 @@ $$
 ## Relational Algebra (RA) $\equiv$ Safe Relational Calculus (RC)
 RA and RC are syntactically different but semantically _equally expressive_.
 
-  - important as your database engine needs to be able translate your what to a how.
+  - important as your database engine needs to be able translate your what (RC) to a how (RA).
 
 ## Relational Algebra to Relational Calculus
 Translate each RA expression $E$ into a FOL formula $\varphi$.
@@ -361,37 +363,35 @@ Environment ($\eta$)
   : _Injective Map_ from attributes to values.
 
   - map convention to be used in class $\eta (A) = x_A$ 
+  - could choose any, e.g $\eta (A) = a$, $\eta (A) = y_{potato}$
 
 ### Base Relation
   
 
 $R$ over $A_1,...,A_n$ is translated to $R(\eta(A_1),...,\eta(A_n))$
 
-_Example:_ If $R$ is a base relation over $A,B$
-$$\eta = \{ A \mapsto x_A, B \mapsto x_B \}$$
+_Example:_ If $R$ is a base relation over $A,B$ then we could create the following map of the environment: $\eta = \{ A \mapsto x_A, B \mapsto x_B \}$
 
-### Renaming
+### Renaming ($\eta$)
 
-$$\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$$
-
-__Process__ _Rename($\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$) $\rightarrow$ RC:_
+__Algorithm__ _Rename($\rho_{\text{OLD} \rightarrow \text{NEW}} (E)$) $\rightarrow$ RC:_
 
   1. Translate $E$ to $\varphi$.
   2. If there is no mapping for NEW in $\eta$ add $\{ \text{NEW} \mapsto x_{\text{new}} \}$.
-  3. Replace every occurrence of $eta(\text{NEW})$ in $\varphi$ with a _fresh_ variable.
+  3. Replace every occurrence of $\eta(\text{NEW})$ in $\varphi$ with a _fresh_ variable.
   4. Replace every (free) occurrence of $\eta(\text{OLD})$ in $\varphi$ by $\eta(\text{NEW})$.
 
 _Example:_ If $R$ is a base relation over $A,B$ then translate the following (RA) to relational calculus, $\rho_{A \rightarrow B}(\rho_{B \rightarrow C}(R))$.
 
-  1. Translate inner bracket $\rho_{B \rightarrow C}(R))$\
-      1. Translate inner bracket $R$ over $A,B$ gives 
+  1. Translate inner bracket $\rho_{B \rightarrow C}(R)$\
+      1. Translate the inner (inner) bracket, $(R)$, over $A,B$ gives 
 $$R(x_A,x_B)$$
       2. No mapping for $C$ (NEW) so adding $C$ to map,
 $$M = \{ A \mapsto x_A, B \mapsto x_B,  C \mapsto x_C \}$$
       3. no occurrence of $x_C$ ($\eta$(NEW)) in $R(x_A,x_B)$ so this step does nothing.
       4. Replacing $x_B$ with $x_C$ gives
 $$R(x_A,x_C)$$
-  2. Mapping for $B$ so does nothing.
+  2. Existing mapping for $B$ so do not need to add to map.
   3. No instance of $x_B$ so this step does nothing.
   4. Replacing $x_A$ with $x_B$
 $$R(x_B,x_C)$$
@@ -401,12 +401,12 @@ $$\rho_{A \rightarrow B}(\rho_{B \rightarrow C}(R)) \iff R(x_B,x_C)$$
 
 
 ### Projection
-$$\pi(E) \text{ is translated to } \exists X \varphi$$
-where
+$\pi(E) \text{ is translated to } \exists X \varphi$\
+where,
 
   - $\varphi$ is the translation of $E$
   - $X = \textbf{ free}(\varphi) - \eta(\alpha)$
-    - attributes that are _not_ projected become quantified
+    - _Intuition:_ attributes that are _not_ projected become quantified
 
 _Example:_ For a base relation $R$ over $A,B$, translate $\pi_A(R)$.
 
@@ -414,8 +414,8 @@ $$\exists x_B R(a_A,x_B)$$
 
 
 ### Selection
-$$\sigma_{\theta}(E) \text{ is translated to } \varphi \land \eta(\theta)$$
-where
+$\sigma_{\theta}(E) \text{ is translated to } \varphi \land \eta(\theta)$\
+where,
 
   - $\varphi$ is the translation of $E$
   - $\eta(\theta)$ is obtained from $\theta$ by replacing each attribute $A$ by $\eta(A)$
