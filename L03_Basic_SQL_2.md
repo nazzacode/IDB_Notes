@@ -12,16 +12,16 @@ WHERE <condition>
 Joins are syntactic sugar for filters with multiple tables
 
 ```SQL
-table1 JOIN table2 ON <condition>
-table1 INNER JOIN table2 ON <condition>
-table1 LEFT JOIN table2 ON <condition>
-table1 RIGHT JOIN table2 ON <condition>
-table1 OUTER JOIN table2 ON <condition>
+table1 JOIN table2 ON <condition>       -- defaults to inner
+table1 INNER JOIN table2 ON <condition> -- rows in t1 and t2
+table1 LEFT JOIN table2 ON <condition>  -- rows in t1
+table1 RIGHT JOIN table2 ON <condition> -- rows in t2 
+table1 OUTER JOIN table2 ON <condition> -- rows in t1 or t2
 ```
 
-## Renaming attributes
+## (Re)naming Attributes in Queries
 ```SQL
-... FROM Customer c, Account [AS] A ...
+... FROM Customer C, Account [AS] A ...
 ```
 
 - the `AS` is optional 

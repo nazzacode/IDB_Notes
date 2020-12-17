@@ -1,5 +1,5 @@
 
-# IDB Lecture 10: Translating Relational Calculus to Relational Algebra
+# IDB Lecture 10: Translating RC to RA
 
 ## Active Domain in Relational Algebra
 For a Relation $R$ over attributes $A_1,...,A_n$

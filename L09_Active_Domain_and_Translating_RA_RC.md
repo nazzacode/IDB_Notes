@@ -1,5 +1,5 @@
 
-# IDB Lecture 9: Active Domain & Translating Relational Algebra/Calculus
+# IDB Lecture 9: Active Domain (Adom) & Translating RA to RC
 
 ## Active Domain 
 Active Domain (Adom(R)
@@ -36,7 +36,7 @@ Environment ($\eta$)
 
 $R$ over $A_1,...,A_n$ is translated to $R(\eta(A_1),...,\eta(A_n))$
 
-_Example:_ If $R$ is a base realtion over $A,B$
+_Example:_ If $R$ is a base relation over $A,B$
 $$\eta = \{ A \mapsto x_A, B \mapsto x_B \}$$
 
 ### Renaming

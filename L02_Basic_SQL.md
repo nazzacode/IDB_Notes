@@ -12,7 +12,7 @@ __Data Definition Language (DDL):__ operations on the schema\
 __Data Manipulation Language (DML):__ operations on the instance\ 
 
 ## Getting to the UOE psql prompt
-Better instructions on pizza:
+Better instructions on piazza:
 
 1. `ssh s1869292@ssh.inf.ed.ac.uk`
 2. `ssh student.login`
@@ -34,8 +34,8 @@ ALTER TABLE <name>
 	SET DEFAULT <value>;
 	DROP DEFAULT;
 
-TRUNCATE TABLE <name>;
-DROP TABLE <name>;
+TRUNCATE TABLE <name>  -- removes all entries;
+DROP TABLE <name>   -- deletes table;
 ```
 
 ## Basic Queries
@@ -44,4 +44,4 @@ SELECT <list_of_attributes>
 FROM <list_of_tables>
 WHERE <condtion>
 ```
-- when multiples tables are selected in 'FROM', the tables are concatenated (all rows with all rows/nested loop)
+- when multiples tables are selected in 'FROM', the tables are concatenated using the cartesian product

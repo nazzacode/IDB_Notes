@@ -1,4 +1,3 @@
-
 ---
 title: Introduction to Databases (IDB)
 author: Nathan Sharp (Dr Paolo Guagliardo) 
@@ -52,7 +51,7 @@ __Data Definition Language (DDL):__ operations on the schema\
 __Data Manipulation Language (DML):__ operations on the instance\ 
 
 ## Getting to the UOE psql prompt
-Better instructions on pizza:
+Better instructions on piazza:
 
 1. `ssh s1869292@ssh.inf.ed.ac.uk`
 2. `ssh student.login`
@@ -74,8 +73,8 @@ ALTER TABLE <name>
 	SET DEFAULT <value>;
 	DROP DEFAULT;
 
-TRUNCATE TABLE <name>;
-DROP TABLE <name>;
+TRUNCATE TABLE <name>  -- removes all entries;
+DROP TABLE <name>   -- deletes table;
 ```
 
 ## Basic Queries
@@ -84,7 +83,7 @@ SELECT <list_of_attributes>
 FROM <list_of_tables>
 WHERE <condtion>
 ```
-- when multiples tables are selected in 'FROM', the tables are concatenated (all rows with all rows/nested loop)
+- when multiples tables are selected in 'FROM', the tables are concatenated using the cartesian product
 
 # IDB Lecture 3: Basic SQL 2
 
@@ -99,16 +98,16 @@ WHERE <condition>
 Joins are syntactic sugar for filters with multiple tables
 
 ```SQL
-table1 JOIN table2 ON <condition>
-table1 INNER JOIN table2 ON <condition>
-table1 LEFT JOIN table2 ON <condition>
-table1 RIGHT JOIN table2 ON <condition>
-table1 OUTER JOIN table2 ON <condition>
+table1 JOIN table2 ON <condition>       -- defaults to inner
+table1 INNER JOIN table2 ON <condition> -- rows in t1 and t2
+table1 LEFT JOIN table2 ON <condition>  -- rows in t1
+table1 RIGHT JOIN table2 ON <condition> -- rows in t2 
+table1 OUTER JOIN table2 ON <condition> -- rows in t1 or t2
 ```
 
-## Renaming attributes
+## (Re)naming Attributes in Queries
 ```SQL
-... FROM Customer c, Account [AS] A ...
+... FROM Customer C, Account [AS] A ...
 ```
 
 - the `AS` is optional 
@@ -137,11 +136,11 @@ Product ($\times$)
   : cartesian product _concatenates_ each tuple of $R$ with each tuples of $S$. Of general form
   $$R \times S.$$ 
   
-  - conditional on the relations having a disjoint set of atributes
+  - relations mut have a disjoint set of atributes
   - $cardinality(R \times S) = cardinality(R) \times cardinality(S)$
     - where __Cardinality__ is the number of attribues.
   - $arity(R \times S) = arity(R) + arity(S)$
-    - where __Arity__ is the number of rows.\
+    - where __Arity__ is the number of _attributes_.\
 
 Renaming ($\rho$)
   : gives a new name to some attribute of a relation with syntax 
@@ -331,7 +330,7 @@ Safety
   - Safety Test: can this query give me an infinite answer (on an infinite database)?
 
 
-# IDB Lecture 9: Active Domain & Translating Relational Algebra/Calculus
+# IDB Lecture 9: Active Domain (Adom) & Translating RA to RC
 
 ## Active Domain 
 Active Domain (Adom(R)
@@ -368,7 +367,7 @@ Environment ($\eta$)
 
 $R$ over $A_1,...,A_n$ is translated to $R(\eta(A_1),...,\eta(A_n))$
 
-_Example:_ If $R$ is a base realtion over $A,B$
+_Example:_ If $R$ is a base relation over $A,B$
 $$\eta = \{ A \mapsto x_A, B \mapsto x_B \}$$
 
 ### Renaming
@@ -465,7 +464,7 @@ Translating to RC
 
 
 
-# IDB Lecture 10: Translating Relational Calculus to Relational Algebra
+# IDB Lecture 10: Translating RC to RA
 
 ## Active Domain in Relational Algebra
 For a Relation $R$ over attributes $A_1,...,A_n$

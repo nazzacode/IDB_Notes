@@ -22,11 +22,11 @@ Product ($\times$)
   : cartesian product _concatenates_ each tuple of $R$ with each tuples of $S$. Of general form
   $$R \times S.$$ 
   
-  - conditional on the relations having a disjoint set of atributes
+  - relations mut have a disjoint set of atributes
   - $cardinality(R \times S) = cardinality(R) \times cardinality(S)$
     - where __Cardinality__ is the number of attribues.
   - $arity(R \times S) = arity(R) + arity(S)$
-    - where __Arity__ is the number of rows.\
+    - where __Arity__ is the number of _attributes_.\
 
 Renaming ($\rho$)
   : gives a new name to some attribute of a relation with syntax 
